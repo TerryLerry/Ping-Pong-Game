@@ -56,7 +56,8 @@ speedXball = 2
 ball = Ball('ball.jpg',400,300,0,40,40,speedYball,speedXball)
 clock = time.Clock()
 FPS = 60
-
+win_1 = font.render('Игрок 1 победил!', True, (255,215,20))
+win_2 = font.render('Игрок 2 победил!', True, (255,215,20))
 #игровой цикл
 
 finish = True
@@ -83,7 +84,13 @@ while game:
     if sprite.collide_rect(ball, player_right):
         speedXball *= -1    
     if sprite.collide_rect(ball, player_left):
-        speedXball *= -1                          
+        speedXball *= -1     
+    if ball.rect.x >= 760:
+        window.blit(win_1, (200,275))
+        finish = False
+    if ball.rect.x <= 30:
+        window.blit(win_2, (200,275))
+        finish = False    
     for e in event.get():
             if e.type == QUIT:
                 game = False
